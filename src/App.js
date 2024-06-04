@@ -1,7 +1,7 @@
 import Header from "./Header";
 import Form from "./Form";
 import List from "./List";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import "./index.css";
 
 export default function App() {
@@ -110,6 +110,17 @@ export default function App() {
 
     const itemsNeeded = allItemsList.filter(item => !item.onHand);
     const itemsOnHand = allItemsList.filter(item => item.onHand);
+
+    useEffect(() => {
+        const storedItems = localStorage.getItem('groceryListItems');
+        if (storedItems) {
+            setAllItemsList(JSON.parse(storedItems));
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('groceryListItems', JSON.stringify(allItemsList));
+    }, [allItemsList]);
 
     function addItem(item) {
         setAllItemsList([...allItemsList, item]);
