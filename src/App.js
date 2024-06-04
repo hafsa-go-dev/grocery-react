@@ -116,20 +116,28 @@ export default function App() {
         if (storedItems) {
             setAllItemsList(JSON.parse(storedItems));
         }
-    }, []);
+    }, []); // Run only once on component mount
 
     useEffect(() => {
         localStorage.setItem('groceryListItems', JSON.stringify(allItemsList));
     }, [allItemsList]);
 
     function addItem(item) {
-        setAllItemsList([...allItemsList, item]);
+        setAllItemsList(prevItems => [...prevItems, item]);
     }
 
     function toggleItemStatus(itemId) {
-        setAllItemsList(allItemsList.map(item =>
-            item.id === itemId ? { ...item, onHand: !item.onHand } : item
-        ));
+        setAllItemsList(prevItems =>
+            prevItems.map(item =>
+                item.id === itemId ? { ...item, onHand: !item.onHand } : item
+            )
+        );
+    }
+
+    function removeItem(itemId) {
+        setAllItemsList(prevItems =>
+            prevItems.filter(item => item.id !== itemId)
+        );
     }
 
     return (
@@ -137,9 +145,10 @@ export default function App() {
             <Header />
             <Form addItem={addItem} />
             <List
-                itemsNeeded={itemsNeeded}
-                itemsOnHand={itemsOnHand}
+                itemsNeeded={allItemsList.filter(item => !item.onHand)}
+                itemsOnHand={allItemsList.filter(item => item.onHand)}
                 toggleItemStatus={toggleItemStatus}
+                removeItem={removeItem}
             />
         </div>
     );

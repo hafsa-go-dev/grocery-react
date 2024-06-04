@@ -1,17 +1,23 @@
-export default function List({ itemsNeeded, itemsOnHand, toggleItemStatus }) {
+export default function List({ itemsNeeded, itemsOnHand, toggleItemStatus, removeItem }) {
+    const sortedItemsNeeded = itemsNeeded.slice().sort((a, b) => a.name.localeCompare(b.name));
+    const sortedItemsOnHand = itemsOnHand.slice().sort((a, b) => a.name.localeCompare(b.name));
+
     return (
         <div className="list-container">
             <div className="list-section">
                 <h2>Items Needed</h2>
                 <ul className="list">
-                    {itemsNeeded.map(item => (
+                    {sortedItemsNeeded.map(item => (
                         <li key={item.id} className="list-item">
                             <div>
                                 <span>{item.name}</span>
-                                <span className="meta"><em><strong>Aisle: </strong>{item.aisle}</em></span>
-                                <span className="meta"><em><strong>From: </strong>{item.from.join(", ")}</em></span>
+                                <span className="meta">Aisle: {item.aisle}</span>
+                                <span className="meta">From: {item.from.join(", ")}</span>
                             </div>
-                            <button className="action-button" onClick={() => toggleItemStatus(item.id)}>On Hand</button>
+                            <div>
+                                <button className="action-button" onClick={() => toggleItemStatus(item.id)}>On Hand</button>
+                                <button className="action-button" onClick={() => removeItem(item.id)}>Remove</button>
+                            </div>
                         </li>
                     ))}
                 </ul>
@@ -19,14 +25,17 @@ export default function List({ itemsNeeded, itemsOnHand, toggleItemStatus }) {
             <div className="list-section">
                 <h2>Items On Hand</h2>
                 <ul className="list">
-                    {itemsOnHand.map(item => (
+                    {sortedItemsOnHand.map(item => (
                         <li key={item.id} className="list-item">
                             <div>
                                 <span>{item.name}</span>
-                                <span className="meta"><em><strong>Aisle:</strong> {item.aisle}</em></span>
-                                <span className="meta"><em><strong>From: </strong>{item.from.join(", ")}</em></span>
+                                <span className="meta">Aisle: {item.aisle}</span>
+                                <span className="meta">From: {item.from.join(", ")}</span>
                             </div>
-                            <button className="action-button" onClick={() => toggleItemStatus(item.id)}>Needed</button>
+                            <div>
+                                <button className="action-button" onClick={() => toggleItemStatus(item.id)}>Needed</button>
+                                <button className="action-button" onClick={() => removeItem(item.id)}>Remove</button>
+                            </div>
                         </li>
                     ))}
                 </ul>
