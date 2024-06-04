@@ -133,15 +133,28 @@ body {
     padding: 8px 16px;
     border: none;
     border-radius: 5px;
-    background-color: #d10363;;
+    background-color: #808836;
     color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.remove-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffffff;;
+    color: #ff0000;
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .action-button:hover {
-    background-color: #9c004d;
+    background-color: #5b6312;
+}
+.remove-button:hover {
+    background-color: #ff9a00;
 }
 
 h2 {
@@ -149,4 +162,86 @@ h2 {
     padding: 1rem;
     color: white;
     border-radius: 1.5rem;
+}
+
+
+.fieldset {
+    border: none;
+    padding: 0;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 1.7rem;
+    height: 1.7rem;
+    cursor: pointer;
+    border: none;
+    accent-color: #d10363;
+}
+
+.checkboxes-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.checkbox-group,
+.radio-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.checkbox-group label,
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.radio-group input[type="radio"] {
+    width: 1.3rem;
+    height: 1.3rem;
+    cursor: pointer;
+    accent-color: #d10363;
+}
+
+.sorting-controls {
+    width: 23rem;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    background-color: #808836;
+}
+
+.sorting-select {
+    font-size: 1rem;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    margin-left: 10px;
+}
+
+.sorting-label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
 }
